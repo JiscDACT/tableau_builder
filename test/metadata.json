@@ -1,0 +1,104 @@
+{
+  "collection": {
+    "name": "Superstore",
+    "description": "The core dataset for doing Tableau testing.",
+    "fields": [
+      {
+        "fieldName": "Order Identifier",
+        "description": "The identifier for the order",
+        "physical_column_name": "Order ID"
+      },
+      {
+        "fieldName": "Ship Mode",
+        "description": "Mode of shipping",
+        "groups": [
+          "Shipping"
+        ]
+      },
+      {
+        "fieldName": "Ship Date",
+        "description": "Date of shipping",
+        "groups": [
+          "Shipping"
+        ]
+      },
+      {
+        "fieldName": "Category",
+        "description": "Category of item",
+        "groups": [
+          "Product"
+        ]
+      },
+      {
+        "fieldName": "Product Name",
+        "description": "Name of item",
+        "groups": [
+          "Product"
+        ]
+      },
+      {
+        "fieldName": "Country/Region",
+        "description": "Country/Region",
+        "hierarchies": [
+          {
+            "hierarchy": "Location",
+            "level": 10
+          }
+        ]
+      },
+      {
+        "fieldName": "Region",
+        "description": "Region",
+        "hierarchies": [
+          {
+            "hierarchy": "Location",
+            "level": 20
+          }
+        ]
+      },
+      {
+        "fieldName": "State/Province",
+        "description": "State/Province",
+        "hierarchies": [
+          {
+            "hierarchy": "Location",
+            "level": 30
+          }
+        ]
+      },
+      {
+        "fieldName": "City",
+        "description": "City",
+        "hierarchies": [
+          {
+            "hierarchy": "Location",
+            "level": 40
+          }
+        ]
+      },
+      {
+        "fieldName": "Postal Code",
+        "description": "Postal Code",
+        "hierarchies": [
+          {
+            "hierarchy": "Location",
+            "level": 50
+          }
+        ]
+      },
+      {
+        "fieldName": "Profit Ratio",
+        "description": "Profit Ratio",
+        "formula": "SUM([Profit])/SUM([Sales])"
+      },
+      {
+        "fieldName": "Sales",
+        "description": "Sales"
+      },
+      {
+        "fieldName": "Profit",
+        "description": "Profit"
+      }
+    ]
+  }
+}
