@@ -9,6 +9,7 @@ setup(
     author='scottw',
     author_email='scott.wilson@jisc.ac.uk',
     description='Programmatically build Tableau packages',
+    long_description="Programmatically build Tableau packages",
     include_package_data=True,
     package_data={
         # If any package contains *.ini files, include them
