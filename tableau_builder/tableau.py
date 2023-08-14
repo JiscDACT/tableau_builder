@@ -9,7 +9,7 @@ from tableau_builder.hierarchy import Hierarchy
 
 EXCEL_TYPE = 'Excel'
 CSV_TYPE = 'csv'
-
+HYPER_TYPE = 'hyper'
 
 class Tableau:
 
@@ -25,10 +25,12 @@ class Tableau:
     def set_csv_location(self, file_path) -> None:
         self.create_connection(file_path, connection_type=CSV_TYPE)
 
-    def create_connection(self, file_path, table_name='Sheet1', connection_type=CSV_TYPE, package=False) -> None:
+    def create_connection(self, file_path, table_name='Sheet1', schema_name='public', connection_type=CSV_TYPE, package=False) -> None:
         self.connection = Federation()
         if connection_type == EXCEL_TYPE:
             self.connection.connect_to_excel(file_path, table_name=table_name, package=package)
+        elif connection_type == HYPER_TYPE:
+            self.connection.connect_to_hyper(file_path, table_name=table_name, schema_name=schema_name, package=package)
         elif connection_type == CSV_TYPE:
             self.connection.connect_to_csv(file_path, package=package)
 
@@ -59,10 +61,11 @@ class Tableau:
         self.columns.append(column)
 
     def hide_other_fields(self) -> None:
-        # todo make this work with Excel too
-        for column in self.connection.get_columns():
-            if not self.get_column_by_name(column):
-                self.hide_field(column)
+        # todo make this work with Excel and Hyper too
+        if self.connection.connection.class_name == CSV_TYPE:
+            for column in self.connection.get_columns():
+                if not self.get_column_by_name(column):
+                    self.hide_field(column)
 
     def add_dimension(self, name='field', description=None) -> None:
         self.add_field(name, datatype='string', role='dimension', type='nominal', description=description)

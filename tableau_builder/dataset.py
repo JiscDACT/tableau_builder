@@ -10,6 +10,30 @@ from tableau_builder.tableau import Tableau
 TABLEAU_DATASOURCE_EXTENSION = '.tds'
 CSV = 'csv'
 EXCEL = 'Excel'
+HYPER = 'hyper'
+
+
+def create_tdsx_from_hyper(data_file=None, output_file=None, table_name='table', schema='public'):
+    """
+    Creates a Tableau Packaged Data Source (.tdsx) from the hyper file path supplied, and saves it
+    at the specified location. Raises ValueError if either is not supplied, and FileNotFoundError
+    if the data file does not exist.
+    :param data_file: the path to the hyper data file
+    :param output_file: the path to save the .tdsx
+    :param table_name: the name of the table in the .hyper
+    :param schema: the schema of the table, 'public' by default
+    :return: None
+    """
+    if data_file is None or output_file is None:
+        raise ValueError("Both a data file and an output path must be specified")
+    if not os.path.exists(data_file):
+        raise FileNotFoundError("Cannot find the CSV data file specified")
+    with NamedTemporaryFile(suffix='.tds', prefix=os.path.basename(__file__)) as tf:
+        tds = tf.name
+        tableau = Tableau()
+        tableau.create_connection(file_path=data_file, package=True, table_name=table_name, schema_name=schema, connection_type=HYPER)
+        tableau.save(tds)
+        package_tds(tds, data_file=data_file, output_file=output_file)
 
 
 def create_tdsx_from_excel(data_file=None, output_file=None, sheet_name='sheet1'):
@@ -58,7 +82,7 @@ def create_tdsx(
         dataset_file,
         metadata_repository=None,
         data_file='example.xls',
-        sheet_name='Orders',
+        table_name='Orders',
         data_source_type=CSV,
         output_file='datasource',
         hide_unused=True,
@@ -69,8 +93,8 @@ def create_tdsx(
     :param use_metadata_groups: if true, generates folders/groups from metadata
     :param metadata_repository: metadata repository object
     :param dataset_file: dataset description file path
-    :param data_file: path to .csv or .xls
-    :param sheet_name: (Excel only) name of the sheet containing data
+    :param data_file: path to .csv or .xls or .hyper
+    :param table_name: name of the sheet containing data for Excel, or table in Hyper
     :param data_source_type: 'Excel' or 'csv'
     :param output_file: Name of the output file. Don't include the extension as this is added automatically.
     :param hide_unused: if True, hide any fields not explicitly included
@@ -80,6 +104,7 @@ def create_tdsx(
                dataset_file=dataset_file,
                data_file=data_file,
                output_file=output_file + TABLEAU_DATASOURCE_EXTENSION,
+               table_name=table_name,
                data_source_type=data_source_type,
                hide_unused=hide_unused,
                package=True,
@@ -93,7 +118,7 @@ def create_tds(
         metadata_repository: BaseRepository=None,
         dataset_file=None,
         data_file='example.xls',
-        sheet_name='Orders',
+        table_name='Orders',
         data_source_type=CSV,
         output_file='test2.tds',
         package=False,
@@ -105,8 +130,8 @@ def create_tds(
     :param metadata_repository: the metadata repository
     :param hide_unused: if True, hide any fields not explicitly included
     :param dataset_file: dataset description file path
-    :param data_file: path to .csv or .xls
-    :param sheet_name: (Excel only) name of the sheet containing data
+    :param data_file: path to .csv or .xls or .hyper
+    :param table_name: name of the sheet containing data for Excel, or table in Hyper
     :param data_source_type: 'Excel' or 'csv'
     :param output_file: Name of the output file. Don't include the extension as this is added automatically.
     :param package: True if the TDS is being created for a TDSX package, otherwise False
@@ -116,7 +141,7 @@ def create_tds(
         manifest = json.load(file)
 
     tableau = Tableau()
-    tableau.create_connection(file_path=data_file, table_name=sheet_name, connection_type=data_source_type,
+    tableau.create_connection(file_path=data_file, table_name=table_name, connection_type=data_source_type,
                               package=package)
 
     # Dimensions
