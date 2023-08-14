@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='tableau_builder',
-    version='1.0',
+    version='0.2',
     packages=['tableau_builder'],
     url='https://github.com/JiscDACT/tableau-builder',
     license='',
