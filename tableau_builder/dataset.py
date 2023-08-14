@@ -2,9 +2,9 @@ import json
 import os
 from tempfile import NamedTemporaryFile
 
-from metadata import RepositoryItem, Hierarchy, BaseRepository
-from package import package_tds
-from tableau import Tableau
+from tableau_builder.metadata import RepositoryItem, Hierarchy, BaseRepository
+from tableau_builder.package import package_tds
+from tableau_builder.tableau import Tableau
 
 
 TABLEAU_DATASOURCE_EXTENSION = '.tds'
