@@ -1,0 +1,23 @@
+name: Audit
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  selftest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: install
+        run: |
+          python -m venv env/
+          source env/bin/activate
+          python -m pip install -r requirements.txt
+      - uses: pypa/gh-action-pip-audit@v1.0.7
+        with:
+          virtual-environment: env/
+          local: true
