@@ -9,10 +9,10 @@ def test_tableau():
     tableau.add_measure('Sales')
     tableau.add_dimension('Ship Mode')
     tableau.hide_other_fields()
-    tableau.save("test"+os.sep+"test_tableau.tds")
+    tableau.save("output"+os.sep+"test_tableau.tds")
 
 
 def test_tableau_minimal_csv():
     tableau = Tableau()
     tableau.set_csv_location('test/orders.csv')
-    tableau.save("test"+os.sep+"test_tableau_min.tds")
+    tableau.save("output"+os.sep+"test_tableau_min.tds")

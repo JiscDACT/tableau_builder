@@ -1,0 +1,49 @@
+{
+  "name": "my dataset",
+  "description": "This is an example of a dataset definition",
+  "metadata": {
+    "source": "example/metadata.json"
+  },
+  "data": {
+    "source": "example/orders.csv"
+  },
+  "measures": {
+    "fields": [
+      "Sales",
+      "Profit Ratio"
+    ]
+  },
+  "dimensions": {
+    "fields": [
+      "Ship Mode",
+      "Ship Date",
+      "Order Identifier",
+      "Country/Region",
+      "Region",
+      "State/Province",
+      "City",
+      "Postal Code"
+    ],
+    "groups": [
+      {
+        "name": "Shipping",
+        "members": [
+          "Ship Mode",
+          "Ship Date"
+        ]
+      }
+    ],
+    "hierarchies": [
+      {
+        "name": "Location",
+        "members": [
+          "Country/Region",
+          "Region",
+          "State/Province",
+          "City",
+          "Postal Code"
+        ]
+      }
+    ]
+  }
+}
