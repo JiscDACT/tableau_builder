@@ -4,6 +4,8 @@ from tableau_builder.tableau import Tableau
 
 
 def test_tableau():
+    if not os.path.exists('output'):
+        os.makedirs('output')
     tableau = Tableau()
     tableau.set_csv_location('test/orders.csv')
     tableau.add_measure('Sales')
@@ -13,6 +15,8 @@ def test_tableau():
 
 
 def test_tableau_minimal_csv():
+    if not os.path.exists('output'):
+        os.makedirs('output')
     tableau = Tableau()
     tableau.set_csv_location('test/orders.csv')
     tableau.save("output"+os.sep+"test_tableau_min.tds")
