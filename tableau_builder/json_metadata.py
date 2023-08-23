@@ -38,7 +38,7 @@ class JsonRepository(BaseRepository):
             collection_name = metadata['collection']['name']
             self.__add_collection__(collection_name)
 
-        for field in metadata['collection']['fields']:
+        for field in metadata['collection']['items']:
             groups = None
             formula = None
             if 'groups' in field:
@@ -48,7 +48,7 @@ class JsonRepository(BaseRepository):
                 formula = field['formula']
 
             item = RepositoryItem(
-                name=field['fieldName'],
+                name=field['name'],
                 description=field['description'],
                 groups=groups,
                 formula=formula
