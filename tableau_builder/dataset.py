@@ -41,6 +41,7 @@ def create_tdsx_from_excel(data_file=None, output_file=None, sheet_name='sheet1'
     Creates a Tableau Packaged Data Source (.tdsx) from the csv file path supplied, and saves it
     at the specified location. Raises ValueError if either is not supplied, and FileNotFoundError
     if the data file does not exist.
+    :param sheet_name: the sheet in the Excel workbook to use
     :param data_file: the path to the CSV data file
     :param output_file: the path to save the .tdsx
     :return: None
@@ -115,7 +116,7 @@ def create_tdsx(
 
 
 def create_tds(
-        metadata_repository: BaseRepository=None,
+        metadata_repository: BaseRepository = None,
         dataset_file=None,
         data_file='example.xls',
         table_name='Orders',
@@ -127,6 +128,7 @@ def create_tds(
 ) -> None:
     """
     Creates a new Tableau data source (.tds) and saves it in the location specified
+    :param use_metadata_groups: if true, generates folders/groups from metadata
     :param metadata_repository: the metadata repository
     :param hide_unused: if True, hide any fields not explicitly included
     :param dataset_file: dataset description file path
