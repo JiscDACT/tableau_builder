@@ -168,3 +168,25 @@ def test_create_tdsx_using_hyper(csv_path, tmp_path, json_repository):
     )
 
     assert os.path.exists(output_file + '.tdsx')
+
+
+def test_create_tds_using_virtual_hyper(csv_path, tmp_path, json_repository):
+    """
+    Test we can still create a TDS even if we can't actually connect to the .hyper
+    """
+    dataset_file = os.path.join(tmp_path, "dataset.json")
+    output_file = os.path.join('output', "test_create_tds_using_virtual_hyper.tds")
+
+    with open(dataset_file, "w") as f:
+        f.write('{"dimensions": ["Ship Mode"], "measures": ["Sales"]}')
+
+    create_tds(
+        metadata_repository=json_repository,
+        dataset_file=dataset_file,
+        data_file='\\\\server-name\\shared-resource-pathname\\data.hyper',
+        table_name="orders",
+        data_source_type="hyper",
+        output_file=output_file,
+    )
+
+    assert os.path.exists(output_file)
