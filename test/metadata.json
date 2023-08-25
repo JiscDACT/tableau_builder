@@ -39,6 +39,9 @@
       {
         "name": "Country/Region",
         "description": "Country/Region",
+        "groups": [
+          "Location"
+        ],
         "hierarchies": [
           {
             "hierarchy": "Location",
@@ -49,6 +52,9 @@
       {
         "name": "Region",
         "description": "Region",
+        "groups": [
+          "Location"
+        ],
         "hierarchies": [
           {
             "hierarchy": "Location",
@@ -59,6 +65,9 @@
       {
         "name": "State/Province",
         "description": "State/Province",
+        "groups": [
+          "Location"
+        ],
         "hierarchies": [
           {
             "hierarchy": "Location",
@@ -69,6 +78,9 @@
       {
         "name": "City",
         "description": "City",
+        "groups": [
+          "Location"
+        ],
         "hierarchies": [
           {
             "hierarchy": "Location",
@@ -79,6 +91,9 @@
       {
         "name": "Postal Code",
         "description": "Postal Code",
+        "groups": [
+          "Location"
+        ],
         "hierarchies": [
           {
             "hierarchy": "Location",

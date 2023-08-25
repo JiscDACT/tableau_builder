@@ -2,6 +2,7 @@ import json
 import os
 from tempfile import NamedTemporaryFile
 
+from tableau_builder.folder import FolderItem
 from tableau_builder.metadata import RepositoryItem, Hierarchy, BaseRepository
 from tableau_builder.package import package_tds
 from tableau_builder.tableau import Tableau
@@ -174,24 +175,7 @@ def create_tds(
             item = RepositoryItem(name=measure, description=measure)
             add_field(tableau, item, 'measure', datatype='real', type='quantitative')
 
-    # Folders
     fields = measures + dimensions
-    if use_metadata_groups and metadata_repository is not None:
-        groups = {}
-        for field in fields:
-            item = metadata_repository.get_metadata(field)
-            if item.groups is not None:
-                for group in item.groups:
-                    if group in groups:
-                        groups[group].append(item.name)
-                    else:
-                        groups[group] = [item.name]
-        for group in groups:
-            tableau.add_folder(group, groups[group])
-    else:
-        if 'groups' in manifest['dimensions']:
-            for group in manifest['dimensions']['groups']:
-                tableau.add_folder(group['name'], group['members'])
 
     # Hierarchies
     if 'hierarchies' in manifest:
@@ -203,6 +187,28 @@ def create_tds(
         if metadata_repository is not None:
             for hierarchy in metadata_repository.get_hierarchies_for_items(fields):
                 tableau.add_hierarchy(hierarchy)
+
+    # Folders
+    if use_metadata_groups and metadata_repository is not None:
+        groups = {}
+        for field in fields:
+            item = metadata_repository.get_metadata(field)
+            if item.groups is not None:
+                item_to_add = FolderItem(item.name)
+                if item.hierarchies is not None and len(item.hierarchies)>0:
+                    item_to_add = FolderItem(item.hierarchies[0].name, 'drillpath')
+                for group in item.groups:
+                    if group in groups:
+                        if not any(member.name == item_to_add.name for member in groups[group]):
+                            groups[group].append(item_to_add)
+                    else:
+                        groups[group] = [item_to_add]
+        for group in groups:
+            tableau.add_folder(group, groups[group])
+    else:
+        if 'groups' in manifest['dimensions']:
+            for group in manifest['dimensions']['groups']:
+                tableau.add_folder(group['name'], group['members'])
 
     # Hide unused fields
     if hide_unused:

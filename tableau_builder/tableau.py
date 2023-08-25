@@ -4,7 +4,7 @@ from lxml import etree
 
 from tableau_builder.column import Column, CalculatedColumn
 from tableau_builder.connection import Federation
-from tableau_builder.folder import Folder, Folders
+from tableau_builder.folder import Folder, Folders, FolderItem
 from tableau_builder.hierarchy import Hierarchy
 
 EXCEL_TYPE = 'Excel'
@@ -34,12 +34,15 @@ class Tableau:
         elif connection_type == CSV_TYPE:
             self.connection.connect_to_csv(file_path, package=package)
 
-    def add_folder(self, name='folder', fields=None) -> None:
-        if fields is None:
-            fields = []
+    def add_folder(self, name='folder', members=None) -> None:
+        if members is None:
+            members = []
         folder = Folder(name)
-        for field in fields:
-            folder.add_field(field)
+        for member in members:
+            if isinstance(member, FolderItem):
+                folder.folder_items.append(member)
+            else:
+                folder.add_field(member)
         self.folders.append(folder)
 
     def get_column_by_name(self, name) -> Union[str, None]:
