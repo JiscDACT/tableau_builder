@@ -30,6 +30,12 @@ def test_column_semantic_role():
     assert etree.tostring(col.to_xml()) == expected_xml
 
 
+def test_column_format():
+    col = Column(name='Percentage', default_format='p0%', datatype='real', type="quantitative")
+    expected_xml = b'<column datatype="real" name="[Percentage]" role="dimension" type="quantitative" default-format="p0%"/>'
+    assert etree.tostring(col.to_xml()) == expected_xml
+
+
 def test_calculated_column_hidden():
     calc_col = CalculatedColumn(hidden=True)
     assert etree.tostring(calc_col.to_xml()) == b'<column datatype="real" name="[calculation]" role="measure" type="quantitative" hidden="true" caption="calculation"><calculation formula="" class="tableau"/></column>'

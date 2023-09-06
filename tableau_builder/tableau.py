@@ -71,10 +71,10 @@ class Tableau:
                     self.hide_field(column)
 
     def add_dimension(self, name='field', description=None) -> None:
-        self.add_field(name, datatype='string', role='dimension', type='nominal', description=description)
+        self.add_field(name, datatype='string', role='dimension', type='nominal', description=description, default_format=None)
 
     def add_measure(self, name='field', description=None) -> None:
-        self.add_field(name, datatype='real', role='measure', type='quantitative', description=description)
+        self.add_field(name, datatype='real', role='measure', type='quantitative', description=description, default_format=None)
 
     def add_field(self,
                   name='field',
@@ -83,13 +83,14 @@ class Tableau:
                   type='nominal',
                   description=None,
                   semantic_role=None,
+                  default_format=None,
                   formula=None) -> None:
 
         # In columns
         if formula is None:
-            column = Column(name=name, datatype=datatype, role=role, type=type, semantic_role=semantic_role, description=description)
+            column = Column(name=name, datatype=datatype, role=role, type=type, semantic_role=semantic_role, description=description, default_format=default_format)
         else:
-            column = CalculatedColumn(name=name, datatype=datatype, role=role, type=type, semantic_role=semantic_role, description=description, formula=formula)
+            column = CalculatedColumn(name=name, datatype=datatype, role=role, type=type, semantic_role=semantic_role, description=description, formula=formula, default_format=default_format)
         self.columns.append(column)
 
     def save(self, file_path='test.tds') -> None:

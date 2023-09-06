@@ -218,4 +218,12 @@ def create_tds(
 
 
 def add_field(tableau, field, role, datatype='string', type='nominal') -> None:
-    tableau.add_field(name=field.name, role=role, description=field.description, formula=field.formula, datatype=datatype, type=type)
+    tableau.add_field(
+        name=field.name,
+        role=role,
+        description=field.description,
+        formula=field.formula,
+        datatype=datatype,
+        type=type,
+        default_format=field.default_format
+    )

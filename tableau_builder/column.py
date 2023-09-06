@@ -5,7 +5,7 @@ from lxml.etree import Element
 class Column:
 
     def __init__(self, name='field', role='dimension', type='nominal', datatype='string', semantic_role=None,
-                 hidden=False, description=''):
+                 hidden=False, description='', default_format=None):
         self.name = name
         self.role = role
         self.type = type
@@ -13,6 +13,7 @@ class Column:
         self.semantic_role = semantic_role
         self.hidden = hidden
         self.description = description
+        self.default_format = default_format
 
     def get_name(self) -> str:
         """
@@ -34,6 +35,8 @@ class Column:
             formatted_text = etree.SubElement(desc, 'formatted-text')
             run = etree.SubElement(formatted_text, 'run')
             run.text = self.description
+        if self.default_format is not None:
+            element.set("default-format", self.default_format)
         return element
 
 
@@ -46,10 +49,11 @@ class CalculatedColumn(Column):
                  semantic_role=None,
                  hidden=False,
                  description='',
-                 formula=''
+                 formula='',
+                 default_format=None
                  ):
         super().__init__(name=name, role=role, type=type, datatype=datatype, semantic_role=semantic_role, hidden=hidden,
-                         description=description)
+                         description=description, default_format=default_format)
         self.caption = name
         self.formula = formula
 

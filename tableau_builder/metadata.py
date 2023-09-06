@@ -17,6 +17,7 @@ class RepositoryItem:
         self.groups = groups
         self.hierarchies = []
         self.physical_column_name = None
+        self.default_format = None
 
 
 class Hierarchy:
