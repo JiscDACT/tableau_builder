@@ -6,18 +6,19 @@ logger = logging.getLogger(__name__)
 Base API for an extract from a metadata repository
 """
 
+
 class RepositoryItem:
     """
     A metadata item in a collection
     """
-    def __init__(self, name=None, description=None, formula=None, groups=None):
+    def __init__(self, name=None, description=None, formula=None, groups=None, default_format=None):
         self.name = name
         self.description = description
         self.formula = formula
         self.groups = groups
         self.hierarchies = []
         self.physical_column_name = None
-        self.default_format = None
+        self.default_format = default_format
 
 
 class Hierarchy:

@@ -104,7 +104,8 @@
       {
         "name": "Profit Ratio",
         "description": "Profit Ratio",
-        "formula": "SUM([Profit])/SUM([Sales])"
+        "formula": "SUM([Profit])/SUM([Sales])",
+        "default_format": "p0%"
       },
       {
         "name": "Sales",

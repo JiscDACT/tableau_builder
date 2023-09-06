@@ -41,17 +41,22 @@ class JsonRepository(BaseRepository):
         for field in metadata['collection']['items']:
             groups = None
             formula = None
+            default_format = None
             if 'groups' in field:
                 groups = field['groups']
 
             if 'formula' in field:
                 formula = field['formula']
 
+            if 'default_format' in field:
+                default_format = field['default_format']
+
             item = RepositoryItem(
                 name=field['name'],
                 description=field['description'],
                 groups=groups,
-                formula=formula
+                formula=formula,
+                default_format=default_format
             )
             if 'hierarchies' in field:
                 for hierarchy in field['hierarchies']:
