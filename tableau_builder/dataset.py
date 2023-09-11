@@ -85,6 +85,7 @@ def create_tdsx(
         metadata_repository=None,
         data_file='example.xls',
         table_name='Orders',
+        schema_name='public',
         data_source_type=CSV,
         output_file='datasource',
         hide_unused=True,
@@ -92,6 +93,7 @@ def create_tdsx(
 ) -> None:
     """
     Creates a new Tableau packaged data source (.tdsx) and saves it in the location specified
+    :param schema_name: name of the schema if using hyper
     :param use_metadata_groups: if true, generates folders/groups from metadata
     :param metadata_repository: metadata repository object
     :param dataset_file: dataset description file path
@@ -107,6 +109,7 @@ def create_tdsx(
                data_file=data_file,
                output_file=output_file + TABLEAU_DATASOURCE_EXTENSION,
                table_name=table_name,
+               schema_name=schema_name,
                data_source_type=data_source_type,
                hide_unused=hide_unused,
                package=True,
