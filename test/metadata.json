@@ -13,6 +13,9 @@
         "description": "Mode of shipping",
         "groups": [
           "Shipping"
+        ],
+        "domain": [
+          "First Class", "Same Day", "Second Class", "Standard Class"
         ]
       },
       {

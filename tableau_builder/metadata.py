@@ -11,7 +11,14 @@ class RepositoryItem:
     """
     A metadata item in a collection
     """
-    def __init__(self, name=None, description=None, formula=None, groups=None, default_format=None):
+    def __init__(self,
+                 name=None,
+                 description=None,
+                 formula=None,
+                 groups=None,
+                 default_format=None,
+                 domain=None
+                 ):
         self.name = name
         self.description = description
         self.formula = formula
@@ -19,6 +26,7 @@ class RepositoryItem:
         self.hierarchies = []
         self.physical_column_name = None
         self.default_format = default_format
+        self.domain = domain
 
 
 class Hierarchy:

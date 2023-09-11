@@ -42,6 +42,7 @@ class JsonRepository(BaseRepository):
             groups = None
             formula = None
             default_format = None
+            domain = None
             if 'groups' in field:
                 groups = field['groups']
 
@@ -51,12 +52,16 @@ class JsonRepository(BaseRepository):
             if 'default_format' in field:
                 default_format = field['default_format']
 
+            if 'domain' in field:
+                domain = field['domain']
+
             item = RepositoryItem(
                 name=field['name'],
                 description=field['description'],
                 groups=groups,
                 formula=formula,
-                default_format=default_format
+                default_format=default_format,
+                domain=domain
             )
             if 'hierarchies' in field:
                 for hierarchy in field['hierarchies']:
