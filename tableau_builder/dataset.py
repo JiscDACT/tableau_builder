@@ -121,6 +121,7 @@ def create_tds(
         dataset_file=None,
         data_file='example.xls',
         table_name='Orders',
+        schema_name='public',
         data_source_type=CSV,
         output_file='test2.tds',
         package=False,
@@ -134,6 +135,7 @@ def create_tds(
     :param hide_unused: if True, hide any fields not explicitly included
     :param dataset_file: dataset description file path
     :param data_file: path to .csv or .xls or .hyper
+    :param schema_name: name of the schema if using a .hyper
     :param table_name: name of the sheet containing data for Excel, or table in Hyper
     :param data_source_type: 'Excel' or 'csv'
     :param output_file: Name of the output file. Don't include the extension as this is added automatically.
@@ -144,8 +146,13 @@ def create_tds(
         manifest = json.load(file)
 
     tableau = Tableau()
-    tableau.create_connection(file_path=data_file, table_name=table_name, connection_type=data_source_type,
-                              package=package)
+    tableau.create_connection(
+        file_path=data_file,
+        table_name=table_name,
+        connection_type=data_source_type,
+        package=package,
+        schema_name=schema_name
+    )
 
     # Dimensions
     if 'fields' in manifest['dimensions']:
