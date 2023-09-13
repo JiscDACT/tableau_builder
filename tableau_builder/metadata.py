@@ -17,12 +17,14 @@ class RepositoryItem:
                  formula=None,
                  groups=None,
                  default_format=None,
-                 domain=None
+                 domain=None,
+                 range=None
                  ):
         self.name = name
         self.description = description
         self.formula = formula
         self.groups = groups
+        self.range = range
         self.hierarchies = []
         self.physical_column_name = None
         self.default_format = default_format
