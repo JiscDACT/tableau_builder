@@ -42,6 +42,7 @@ class JsonRepository(BaseRepository):
             groups = None
             formula = None
             default_format = None
+            semantic_role = None
             domain = None
             _range = None
             if 'groups' in field:
@@ -52,6 +53,9 @@ class JsonRepository(BaseRepository):
 
             if 'default_format' in field:
                 default_format = field['default_format']
+
+            if 'semantic_role' in field:
+                semantic_role = field['semantic_role']
 
             if 'domain' in field:
                 domain = field['domain']
@@ -65,6 +69,7 @@ class JsonRepository(BaseRepository):
                 groups=groups,
                 formula=formula,
                 default_format=default_format,
+                semantic_role=semantic_role,
                 domain=domain,
                 range=_range
             )
