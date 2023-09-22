@@ -17,6 +17,7 @@ class RepositoryItem:
                  formula=None,
                  groups=None,
                  default_format=None,
+                 semantic_role=None,
                  domain=None,
                  range=None
                  ):
@@ -28,6 +29,7 @@ class RepositoryItem:
         self.hierarchies = []
         self.physical_column_name = None
         self.default_format = default_format
+        self.semantic_role = semantic_role
         self.domain = domain
 
 

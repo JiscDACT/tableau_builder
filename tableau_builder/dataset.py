@@ -235,5 +235,6 @@ def add_field(tableau, field, role, datatype='string', type='nominal') -> None:
         formula=field.formula,
         datatype=datatype,
         type=type,
-        default_format=field.default_format
+        default_format=field.default_format,
+        semantic_role=field.semantic_role
     )
