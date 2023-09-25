@@ -28,3 +28,9 @@ def test_json_repository_domain():
     assert json_repository.get_metadata('Ship Mode') is not None
     assert len(json_repository.get_metadata('Ship Mode').domain) == 4
 
+
+def test_json_types():
+    json_repository = JsonRepository(repository_path=TEST_META_PATH)
+    assert json_repository.get_metadata('Sales') is not None
+    assert json_repository.get_metadata('Sales').datatype == 'double'
+

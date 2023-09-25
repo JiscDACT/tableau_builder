@@ -112,7 +112,8 @@
       },
       {
         "name": "Sales",
-        "description": "Sales"
+        "description": "Sales",
+        "datatype": "double"
       },
       {
         "name": "Profit",

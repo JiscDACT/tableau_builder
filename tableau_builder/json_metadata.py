@@ -45,6 +45,7 @@ class JsonRepository(BaseRepository):
             semantic_role = None
             domain = None
             _range = None
+            datatype = None
             if 'groups' in field:
                 groups = field['groups']
 
@@ -63,6 +64,9 @@ class JsonRepository(BaseRepository):
             if 'range' in field:
                 _range = field['range']
 
+            if 'datatype' in field:
+                datatype = field['datatype']
+
             item = RepositoryItem(
                 name=field['name'],
                 description=field['description'],
@@ -71,7 +75,8 @@ class JsonRepository(BaseRepository):
                 default_format=default_format,
                 semantic_role=semantic_role,
                 domain=domain,
-                range=_range
+                range=_range,
+                datatype=datatype
             )
             if 'hierarchies' in field:
                 for hierarchy in field['hierarchies']:
