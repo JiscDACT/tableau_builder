@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='tableau_builder',
-    version='0.16',
+    version='0.17',
     packages=['tableau_builder'],
     url='https://github.com/JiscDACT/tableau-builder',
     license='',
@@ -15,5 +15,5 @@ setup(
         # If any package contains *.ini files, include them
         '': ['*.ini']
     },
-    install_requires=['pandas', 'lxml', 'openpyxl']
+    install_requires=['pandas', 'lxml', 'openpyxl', 'tableauhyperapi', 'pantab']
 )
