@@ -46,6 +46,7 @@ class JsonRepository(BaseRepository):
             domain = None
             _range = None
             datatype = None
+            continuous = None
             if 'groups' in field:
                 groups = field['groups']
 
@@ -66,6 +67,8 @@ class JsonRepository(BaseRepository):
 
             if 'datatype' in field:
                 datatype = field['datatype']
+            if 'continuous' in field:
+                continuous = field['continuous']
 
             item = RepositoryItem(
                 name=field['name'],
@@ -76,7 +79,8 @@ class JsonRepository(BaseRepository):
                 semantic_role=semantic_role,
                 domain=domain,
                 range=_range,
-                datatype=datatype
+                datatype=datatype,
+                continuous=continuous
             )
             if 'hierarchies' in field:
                 for hierarchy in field['hierarchies']:

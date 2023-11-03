@@ -5,7 +5,7 @@ from lxml.etree import Element
 class Column:
 
     def __init__(self, name='field', role='dimension', type='nominal', datatype='string', semantic_role=None,
-                 hidden=False, description='', default_format=None):
+                 hidden=False, description='', default_format=None, continuous=False):
         self.name = name
         self.role = role
         self.type = type
@@ -14,6 +14,7 @@ class Column:
         self.hidden = hidden
         self.description = description
         self.default_format = default_format
+        self.continuous = continuous
 
     def get_name(self) -> str:
         """

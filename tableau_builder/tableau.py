@@ -70,8 +70,8 @@ class Tableau:
                 if not self.get_column_by_name(column):
                     self.hide_field(column)
 
-    def add_dimension(self, name='field', description=None) -> None:
-        self.add_field(name, datatype='string', role='dimension', type='nominal', description=description, default_format=None)
+    def add_dimension(self, name='field', description=None, type='nominal') -> None:
+        self.add_field(name, datatype='string', role='dimension', type=type, description=description, default_format=None)
 
     def add_measure(self, name='field', description=None) -> None:
         self.add_field(name, datatype='real', role='measure', type='quantitative', description=description, default_format=None)

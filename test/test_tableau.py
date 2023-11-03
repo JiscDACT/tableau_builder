@@ -34,3 +34,24 @@ def test_tableau_add_field_with_semantic_role():
     add_field(tableau=tableau, field=item, role='dimension')
     column: Column = tableau.columns[0]
     assert column.semantic_role == '[Geographical].[Longitude]'
+
+
+def test_tableau_add_field_with_continuous_override():
+    tableau = Tableau()
+    item = RepositoryItem(
+        name="Test",
+        continuous=True
+    )
+    add_field(tableau=tableau, field=item, role='dimension')
+    column: Column = tableau.columns[0]
+    assert column.type == 'quantitative'
+
+
+def test_tableau_add_field_without_continuous_override():
+    tableau = Tableau()
+    item = RepositoryItem(
+        name="Test"
+    )
+    add_field(tableau=tableau, field=item, role='dimension')
+    column: Column = tableau.columns[0]
+    assert column.type == 'nominal'

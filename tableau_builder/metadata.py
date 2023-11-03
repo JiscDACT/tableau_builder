@@ -20,7 +20,8 @@ class RepositoryItem:
                  semantic_role=None,
                  domain=None,
                  range=None,
-                 datatype=None
+                 datatype=None,
+                 continuous=None
                  ):
         self.name = name
         self.description = description
@@ -33,6 +34,7 @@ class RepositoryItem:
         self.semantic_role = semantic_role
         self.domain = domain
         self.datatype = datatype
+        self.continuous = continuous
 
 
 class Hierarchy:

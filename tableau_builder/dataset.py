@@ -228,6 +228,8 @@ def create_tds(
 
 
 def add_field(tableau, field, role, datatype='string', type='nominal') -> None:
+    if field.continuous:
+        type='quantitative'
     tableau.add_field(
         name=field.name,
         role=role,
